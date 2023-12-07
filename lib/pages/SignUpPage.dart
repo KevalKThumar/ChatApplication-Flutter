@@ -175,10 +175,11 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 40,
+            horizontal: 20,
           ),
           child: Center(
             child: SingleChildScrollView(
@@ -196,15 +197,27 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextField(
                     controller: emailController,
-                    decoration:
-                        const InputDecoration(labelText: "Email Address"),
+                    decoration: const InputDecoration(
+                        labelText: "Email Address",
+                        hintText: "Enter your email",
+                        // You can customize other decoration properties here
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ))),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   TextField(
                     controller: nameController,
-                    decoration: const InputDecoration(labelText: "Full Name"),
+                    decoration: const InputDecoration(
+                        labelText: "Full Name",
+                        hintText: "Enter your full name",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ))),
                   ),
                   const SizedBox(
                     height: 10,
@@ -212,7 +225,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   TextField(
                     controller: passwordController,
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: "Password"),
+                    decoration: const InputDecoration(
+                        labelText: "Password",
+                        hintText: "Enter your password",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ))),
                   ),
                   const SizedBox(
                     height: 10,
@@ -220,18 +239,27 @@ class _SignUpPageState extends State<SignUpPage> {
                   TextField(
                     controller: cPasswordController,
                     obscureText: true,
-                    decoration:
-                        const InputDecoration(labelText: "Confirm Password"),
+                    decoration: const InputDecoration(
+                      labelText: "Confirm Password",
+                      hintText: "Confirm your password",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      )),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  CupertinoButton(
-                    onPressed: () {
-                      checkValues();
-                    },
-                    color: Theme.of(context).colorScheme.secondary,
-                    child: const Text("Sign Up"),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: CupertinoButton(
+                      onPressed: () {
+                        checkValues();
+                      },
+                      color: Theme.of(context).colorScheme.secondary,
+                      child: const Text("Sign Up"),
+                    ),
                   ),
                 ],
               ),

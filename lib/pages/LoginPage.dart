@@ -132,10 +132,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 40,
+            horizontal: 20,
           ),
           child: Center(
             child: SingleChildScrollView(
@@ -154,8 +155,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextField(
                     controller: emailController,
-                    decoration:
-                        const InputDecoration(labelText: "Email Address"),
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        hintText: 'Enter your email',
+                        // You can customize other decoration properties here
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        )),
+                      )
                   ),
                   const SizedBox(
                     height: 10,
@@ -163,17 +171,29 @@ class _LoginPageState extends State<LoginPage> {
                   TextField(
                     controller: passwordController,
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: "Password"),
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      hintText: 'Enter your password',
+                      // You can customize other decoration properties here
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  CupertinoButton(
-                    onPressed: () {
-                      checkValues();
-                    },
-                    color: Theme.of(context).colorScheme.secondary,
-                    child: const Text("Log In"),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9, 
+                    child: CupertinoButton(
+                      onPressed: () {
+                        checkValues();
+                      },
+                      color: Theme.of(context).colorScheme.secondary,
+                      child: const Text("Log In"),
+                    ),
                   ),
                 ],
               ),

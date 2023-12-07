@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       drawer: Drawer(
         shape: const BeveledRectangleBorder(side: BorderSide.none),
         child: NotificationListener<UserScrollNotification>(
@@ -58,7 +59,10 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                decoration: BoxDecoration(color: Colors.grey.shade200),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
