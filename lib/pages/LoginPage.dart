@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -112,19 +112,18 @@ class _LoginPageState extends State<LoginPage> {
       // });
       // Go to HomePage
 
-      print("Log In Successful!");
       localNotificationService.sendNotification(
           "Login", "You are login in your account");
-      print('Notification has been send');
-      // print(userModel.tocken);
 
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) {
-          return HomePage(
-              userModel: userModel, firebaseUser: credential!.user!);
-        }),
+        MaterialPageRoute(
+          builder: (context) {
+            return HomePage(
+                userModel: userModel, firebaseUser: credential!.user!);
+          },
+        ),
       );
     }
   }
@@ -154,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 10,
                   ),
                   TextField(
-                    controller: emailController,
+                      controller: emailController,
                       decoration: const InputDecoration(
                         labelText: 'Email',
                         hintText: 'Enter your email',
@@ -163,8 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         )),
-                      )
-                  ),
+                      )),
                   const SizedBox(
                     height: 10,
                   ),
@@ -186,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 20,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9, 
+                    width: MediaQuery.of(context).size.width * 0.9,
                     child: CupertinoButton(
                       onPressed: () {
                         checkValues();

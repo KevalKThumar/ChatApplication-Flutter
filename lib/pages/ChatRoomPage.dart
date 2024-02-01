@@ -188,8 +188,8 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           children: [
             CircleAvatar(
               backgroundColor: Colors.grey[300],
-              backgroundImage: const NetworkImage(
-                  'https://i.ibb.co/23STBpw/05-12-21-happy-people.jpg'),
+              backgroundImage:
+                  NetworkImage(widget.targetUser.profilepic.toString()),
               // NetworkImage(widget.targetUser.profilepic.toString()),
             ),
             const SizedBox(

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:chatapp/models/UIHelper.dart';
 import 'package:chatapp/models/UserModel.dart';
 import 'package:chatapp/pages/HomePage.dart';
+import 'package:chatapp/pages/uplode_imagepage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -164,8 +165,10 @@ class _SignUpPageState extends State<SignUpPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) {
-            return HomePage(
-                userModel: newUser, firebaseUser: credential!.user!);
+            return UplodeImage(
+              userModel: newUser,
+              firebaseUser: credential!.user!,
+            );
           }),
         );
       });

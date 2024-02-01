@@ -6,9 +6,10 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
   final AndroidInitializationSettings _androidInitializationSettings =
       const AndroidInitializationSettings('logo');
+  final DarwinInitializationSettings _iosFlutterLocalNotificationsPlugin  = const DarwinInitializationSettings();
   void initialiseNotification() async {
     InitializationSettings initializationSettings =
-        InitializationSettings(android: _androidInitializationSettings);
+        InitializationSettings(android: _androidInitializationSettings,iOS: _iosFlutterLocalNotificationsPlugin);
     await _notificationsPlugin.initialize(initializationSettings);
   }
 

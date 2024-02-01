@@ -7,6 +7,7 @@ import 'package:chatapp/models/FirebaseHelper.dart';
 import 'package:chatapp/models/UserModel.dart';
 import 'package:chatapp/pages/HomePage.dart';
 import 'package:chatapp/pages/LoginPage.dart';
+import 'package:chatapp/pages/uplode_imagepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -91,7 +92,7 @@ LocalNotificationService localNotificationService = LocalNotificationService();
 
 // Not Logged In
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -119,8 +120,7 @@ class MyAppLoggedIn extends StatefulWidget {
   final User firebaseUser;
 
   const MyAppLoggedIn(
-      {Key? key, required this.userModel, required this.firebaseUser})
-      : super(key: key);
+      {super.key, required this.userModel, required this.firebaseUser});
 
   @override
   State<MyAppLoggedIn> createState() => _MyAppLoggedInState();

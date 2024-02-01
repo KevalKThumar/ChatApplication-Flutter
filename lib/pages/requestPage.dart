@@ -51,19 +51,18 @@ class _RequestPageState extends State<RequestPage> {
           "android_channel_id": "request"
         }
       };
-
-      var response =
-          await post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
-              headers: {
-                HttpHeaders.contentTypeHeader: 'application/json',
-                HttpHeaders.authorizationHeader: 'key=$serverKey',
-              },
-              body: jsonEncode(body));
-
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      await post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json',
+            HttpHeaders.authorizationHeader: 'key=$serverKey',
+          },
+          body: jsonEncode(body));
     } on Exception catch (e) {
-      print('\n$e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
     }
   }
 
@@ -76,13 +75,11 @@ class _RequestPageState extends State<RequestPage> {
       resiverId: toUserId,
       senderId: widget.userModel.uid,
     );
-    print(notification);
+
     FirebaseFirestore.instance
         .collection('notifications')
         .doc(uuid.v1())
-        .set(notification.toMap())
-        .then((value) => print('Notification stored successfully!'))
-        .catchError((error) => print('Failed to store notification: $error'));
+        .set(notification.toMap());
   }
 
   Future<List<Map<String, dynamic>>> getAllUsersListExceptMyAccount() async {
@@ -101,11 +98,10 @@ class _RequestPageState extends State<RequestPage> {
         }
       }
 
-      // print(usersDataCollection);
+      //
 
       return usersDataCollection;
     } catch (e) {
-      print('Error in get All Users List: ${e.toString()}');
       return [];
     }
   }
@@ -114,8 +110,8 @@ class _RequestPageState extends State<RequestPage> {
     final tackUser = await getAllUsersListExceptMyAccount();
     if (mounted) {
       availableUser = tackUser;
-      // print("This is available user:::");
-      // print(availableUser);
+      //
+      //
     }
   }
 
@@ -148,13 +144,13 @@ class _RequestPageState extends State<RequestPage> {
         .first
         .toString()
         .split('[user-name-about-divider]')[1];
-    print(toUserTocken);
+
     var toUserId = availableUser[index]
         .values
         .first
         .toString()
         .split('[user-name-about-divider]')[2];
-    print(toUserId);
+
     return SizedBox(
       height: 80.0,
       width: double.maxFinite,
@@ -186,14 +182,10 @@ class _RequestPageState extends State<RequestPage> {
             onPressed: () {
               setState(() {
                 if (isConnect == false) {
-                  print("connect");
                   isConnect = true;
                   sendPushNotification(toUserTocken);
                   addNotification(toUserId);
-                  print(
-                      "push notificION IS SEND TO THIS TOCKEN:::$toUserTocken");
                 } else {
-                  print("disconnect");
                   isConnect = false;
                 }
               });

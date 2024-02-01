@@ -11,12 +11,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:velocity_x/velocity_x.dart';
-
 import '../main.dart';
 import 'acceptpage.dart';
-import 'date.dart';
 import 'notification_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,8 +21,7 @@ class HomePage extends StatefulWidget {
   final User firebaseUser;
 
   const HomePage(
-      {Key? key, required this.userModel, required this.firebaseUser})
-      : super(key: key);
+      {super.key, required this.userModel, required this.firebaseUser});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -61,15 +57,14 @@ class _HomePageState extends State<HomePage> {
               DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
-                  
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       maxRadius: 50,
                       backgroundImage: NetworkImage(
-                          "https://i.ibb.co/23STBpw/05-12-21-happy-people.jpg"),
+                          widget.userModel.profilepic.toString()),
                     ),
                     6.heightBox,
                     "${userModel.fullname}".text.size(20).make()
@@ -99,18 +94,7 @@ class _HomePageState extends State<HomePage> {
                   }));
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Slide animation'),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const ScrolleAble();
-                    // SearchPage(
-                    //     userModel: widget.userModel,
-                    //     firebaseUser: widget.firebaseUser);
-                  }));
-                },
-              ),
+             
               ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text('Send Request'),
@@ -205,7 +189,10 @@ class _HomePageState extends State<HomePage> {
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("chatrooms")
-              .where("participants.${widget.userModel.uid}", isEqualTo: true)
+              .where(
+                "participants.${widget.userModel.uid}",
+                isEqualTo: true,
+              )
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
@@ -251,9 +238,9 @@ class _HomePageState extends State<HomePage> {
                                       }),
                                     );
                                   },
-                                  leading: const CircleAvatar(
+                                  leading: CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        'https://i.ibb.co/23STBpw/05-12-21-happy-people.jpg'),
+                                        targetUser.profilepic.toString()),
                                     // NetworkImage(
                                     //     targetUser.profilepic.toString()),
                                   ),
@@ -306,8 +293,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return
-                // SearchPageRequest(
-                //     userModel: widget.userModel, firebaseUser: widget.firebaseUser);
+              
                 SearchPage(
                     userModel: widget.userModel,
                     firebaseUser: widget.firebaseUser);

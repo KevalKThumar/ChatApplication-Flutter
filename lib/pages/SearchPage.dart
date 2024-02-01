@@ -83,12 +83,14 @@ class _SearchPageState extends State<SearchPage> {
               TextField(
                 controller: searchController,
                 decoration: const InputDecoration(
-                    labelText: "Email Address",
-                    hintText: "Enter email address",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
+                  labelText: "Email Address",
+                  hintText: "Enter email address",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
                       Radius.circular(10.0),
-                    ))),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -115,7 +117,7 @@ class _SearchPageState extends State<SearchPage> {
                         QuerySnapshot dataSnapshot =
                             snapshot.data as QuerySnapshot;
 
-                        if (dataSnapshot.docs.length > 0) {
+                        if (dataSnapshot.docs.isNotEmpty) {
                           Map<String, dynamic> userMap = dataSnapshot.docs[0]
                               .data() as Map<String, dynamic>;
 
@@ -140,8 +142,8 @@ class _SearchPageState extends State<SearchPage> {
                               }
                             },
                             leading: CircleAvatar(
-                              backgroundImage: const NetworkImage(
-                                  "https://i.ibb.co/23STBpw/05-12-21-happy-people.jpg"),
+                              backgroundImage: NetworkImage(
+                                  searchedUser.profilepic.toString()),
                               // NetworkImage(searchedUser.profilepic!),
                               backgroundColor: Colors.grey[500],
                             ),
